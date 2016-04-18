@@ -9,7 +9,7 @@ namespace BullRunner
 	{
 		private CLLocationManager _Manager = new CLLocationManager ();
 		public List<Stop> Stops = new List<Stop>();
-		public Dictionary<int, Dictionary<int, List<Prediction>>> Predictions;
+		public Dictionary<Stop, List<Prediction>> Predictions = new Dictionary<Stop, List<Prediction>>();
 
 		public HomeViewCtrl (IntPtr handle) : base (handle)
 		{
@@ -34,6 +34,7 @@ namespace BullRunner
 
 			_Manager.LocationsUpdated += LocationsUpdated;
 			this.RefreshControl.ValueChanged += (sender, e) => this.RefreshData (this._Manager.Location);
+			this.NavigationItem.RightBarButtonItem.Clicked += (sender, e) => this.RefreshData(this._Manager.Location);
 		}
 
 		void LocationsUpdated (object sender, CLLocationsUpdatedEventArgs e)
@@ -55,19 +56,12 @@ namespace BullRunner
 			InvokeInBackground (async delegate {
 				try {
 					Stops = await Provider.GetNearbyStopsAsync(l.Coordinate.Latitude, l.Coordinate.Longitude);
-					Predictions = new Dictionary<int, Dictionary<int, List<Prediction>>>();
+					Predictions = new Dictionary<Stop, List<Prediction>>(Stops.Count*5);
+
 					foreach (var s in Stops) {
 						try {
 							var predictions = await Provider.GetPredictionsAsync(s.RouteId, s.StopId);
-							if (predictions.Count > 0) {
-								if (Predictions.ContainsKey(s.StopId)) {
-									Predictions[s.StopId].Add(s.RouteId, predictions);
-								} else {
-									var d = new Dictionary<int, List<Prediction>>();
-									d.Add(s.RouteId, predictions);
-									Predictions.Add(s.StopId, d);
-								}
-							}
+							Predictions.Add(s, predictions);
 						} catch (Exception ex) {
 							Console.WriteLine(ex);
 						}
@@ -76,7 +70,7 @@ namespace BullRunner
 					InvokeOnMainThread(delegate {
 						this.RefreshControl.EndRefreshing();
 						UIApplication.SharedApplication.NetworkActivityIndicatorVisible = false;
-						this.TableView.Source = new StopsSource(this.Stops, this.Predictions);
+						this.TableView.Source = new StopsSource(this.Predictions);
 						this.TableView.ReloadData();
 					});
 				} catch (Exception ex) {
