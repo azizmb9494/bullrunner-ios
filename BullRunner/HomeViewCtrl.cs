@@ -2,6 +2,7 @@ using System;
 using System.Collections.Generic;
 using CoreLocation;
 using UIKit;
+using Foundation;
 
 namespace BullRunner
 {
@@ -33,8 +34,13 @@ namespace BullRunner
 			_Manager.DistanceFilter = 100f;
 
 			_Manager.LocationsUpdated += LocationsUpdated;
-			this.RefreshControl.ValueChanged += (sender, e) => this.RefreshData (this._Manager.Location);
-			this.NavigationItem.RightBarButtonItem.Clicked += (sender, e) => this.RefreshData(this._Manager.Location);
+			this.RefreshControl.ValueChanged += (sender, e) => RefreshData (_Manager.Location);
+			this.NavigationItem.RightBarButtonItem.Clicked += (sender, e) => RefreshData(_Manager.Location);
+
+			NSTimer.CreateRepeatingScheduledTimer (60, delegate {
+				Console.WriteLine("Updating");
+				RefreshData(_Manager.Location);
+			});
 		}
 
 		void LocationsUpdated (object sender, CLLocationsUpdatedEventArgs e)
@@ -56,12 +62,14 @@ namespace BullRunner
 			InvokeInBackground (async delegate {
 				try {
 					Stops = await Provider.GetNearbyStopsAsync(l.Coordinate.Latitude, l.Coordinate.Longitude);
-					Predictions = new Dictionary<Stop, List<Prediction>>(Stops.Count*5);
+					Predictions = new Dictionary<Stop, List<Prediction>>();
 
 					foreach (var s in Stops) {
 						try {
 							var predictions = await Provider.GetPredictionsAsync(s.RouteId, s.StopId);
-							Predictions.Add(s, predictions);
+							if (predictions.Count > 0) { 
+								Predictions.Add(s, predictions);
+							}
 						} catch (Exception ex) {
 							Console.WriteLine(ex);
 						}
