@@ -15,7 +15,7 @@ namespace BullRunner
 		{
 		}
 
-		async public override void ViewDidLoad ()
+		public override void ViewDidLoad ()
 		{
 			base.ViewDidLoad ();
 			// Perform any additional setup after loading the view, typically from a nib.
@@ -76,6 +76,8 @@ namespace BullRunner
 					InvokeOnMainThread(delegate {
 						this.RefreshControl.EndRefreshing();
 						UIApplication.SharedApplication.NetworkActivityIndicatorVisible = false;
+						this.TableView.Source = new StopsSource(this.Stops, this.Predictions);
+						this.TableView.ReloadData();
 					});
 				} catch (Exception ex) {
 					Console.WriteLine(ex);
