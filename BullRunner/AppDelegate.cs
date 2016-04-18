@@ -10,6 +10,7 @@ namespace BullRunner
 	{
 		// class-level declarations
 
+		public static UIColor PrimaryColor = UIColor.FromRGB(0,103,71);
 		public override UIWindow Window {
 			get;
 			set;
@@ -19,7 +20,15 @@ namespace BullRunner
 		{
 			// Override point for customization after application launch.
 			// If not required for your application you can safely delete this method
-
+			if (UIDevice.CurrentDevice.CheckSystemVersion (8, 0)) {
+				UINavigationBar.Appearance.BarTintColor = PrimaryColor;
+				UINavigationBar.Appearance.TintColor = UIColor.White;
+				UINavigationBar.Appearance.SetTitleTextAttributes (new UITextAttributes () {
+					TextColor = UIColor.White
+				});
+			} else {
+				UINavigationBar.Appearance.TintColor = PrimaryColor;
+			}
 			return true;
 		}
 
