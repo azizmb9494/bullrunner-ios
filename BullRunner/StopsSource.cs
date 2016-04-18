@@ -88,15 +88,17 @@ namespace BullRunner
 
 		public override UITableViewCell GetCell (UITableView tableView, Foundation.NSIndexPath indexPath)
 		{
-			var cell = tableView.DequeueReusableCell ("StopCell");
-			if (cell == null) {
-				cell = new UITableViewCell (UITableViewCellStyle.Value2, "StopCell");
-			}
-
+			var cell = tableView.DequeueReusableCell ("StopCell") as StopCell;
 
 			var m = Map [Indexes [indexPath.Section]];
 			var route = Routes [m.Keys.ToArray () [indexPath.Row]];
-			cell.TextLabel.Text = route;
+
+			if (cell == null) {
+				cell = new StopCell (route, Map [Indexes [indexPath.Section]] [m.Keys.ToArray () [indexPath.Row]]);
+			} else {
+				cell.UpdateCell (route, Map [Indexes [indexPath.Section]] [m.Keys.ToArray () [indexPath.Row]]);
+			}
+				
 			return cell;
 		}
 	}
