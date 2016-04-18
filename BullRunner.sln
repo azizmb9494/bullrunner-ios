@@ -3,6 +3,8 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio 2012
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "BullRunner", "BullRunner\BullRunner.csproj", "{4E1C8542-349B-4BEE-A6CB-16F2465D6473}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "BullRunnerToday", "BullRunnerToday\BullRunnerToday.csproj", "{803254B9-1629-4557-9BAF-1F509634DA90}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|iPhoneSimulator = Debug|iPhoneSimulator
@@ -19,5 +21,13 @@ Global
 		{4E1C8542-349B-4BEE-A6CB-16F2465D6473}.Release|iPhone.Build.0 = Release|iPhone
 		{4E1C8542-349B-4BEE-A6CB-16F2465D6473}.Release|iPhoneSimulator.ActiveCfg = Release|iPhoneSimulator
 		{4E1C8542-349B-4BEE-A6CB-16F2465D6473}.Release|iPhoneSimulator.Build.0 = Release|iPhoneSimulator
+		{803254B9-1629-4557-9BAF-1F509634DA90}.Debug|iPhone.ActiveCfg = Debug|iPhone
+		{803254B9-1629-4557-9BAF-1F509634DA90}.Debug|iPhone.Build.0 = Debug|iPhone
+		{803254B9-1629-4557-9BAF-1F509634DA90}.Debug|iPhoneSimulator.ActiveCfg = Debug|iPhoneSimulator
+		{803254B9-1629-4557-9BAF-1F509634DA90}.Debug|iPhoneSimulator.Build.0 = Debug|iPhoneSimulator
+		{803254B9-1629-4557-9BAF-1F509634DA90}.Release|iPhone.ActiveCfg = Release|iPhone
+		{803254B9-1629-4557-9BAF-1F509634DA90}.Release|iPhone.Build.0 = Release|iPhone
+		{803254B9-1629-4557-9BAF-1F509634DA90}.Release|iPhoneSimulator.ActiveCfg = Release|iPhoneSimulator
+		{803254B9-1629-4557-9BAF-1F509634DA90}.Release|iPhoneSimulator.Build.0 = Release|iPhoneSimulator
 	EndGlobalSection
 EndGlobal
