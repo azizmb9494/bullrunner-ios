@@ -1,4 +1,4 @@
-﻿<?xml version="1.0" encoding="UTF-8"?>
+<?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
 <plist version="1.0">
 <dict>
@@ -43,5 +43,15 @@
 	</array>
 	<key>XSAppIconAssets</key>
 	<string>Resources/Images.xcassets/AppIcons.appiconset</string>
+	<key>UIBackgroundModes</key>
+	<array>
+		<string>location</string>
+	</array>
+	<key>NSLocationUsageDescription</key>
+	<string>Find bus stops and arrival information near you.</string>
+	<key>NSLocationAlwaysUsageDescription</key>
+	<string>Find bus stops and arrival information near you.</string>
+	<key>NSLocationWhenInUseUsageDescription</key>
+	<string>Find bus stops and arrival information near you.</string>
 </dict>
 </plist>

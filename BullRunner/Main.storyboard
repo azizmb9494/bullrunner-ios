@@ -30,6 +30,9 @@
                     <navigationItem key="navigationItem" title="BullRunner" id="8Qv-qS-Rbd">
                         <barButtonItem key="rightBarButtonItem" systemItem="refresh" id="aIq-Wm-8fa"/>
                     </navigationItem>
+                    <refreshControl key="refreshControl" opaque="NO" multipleTouchEnabled="YES" contentMode="center" enabled="NO" contentHorizontalAlignment="center" contentVerticalAlignment="center" id="7ic-v8-E2m">
+                        <autoresizingMask key="autoresizingMask"/>
+                    </refreshControl>
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="gtN-ve-opH" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
