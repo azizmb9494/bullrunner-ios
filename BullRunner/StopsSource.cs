@@ -75,7 +75,7 @@ namespace BullRunner
 			distanceLbl.BackgroundColor = UIColor.Clear;
 			distanceLbl.TextAlignment = UITextAlignment.Right;
 			distanceLbl.Font = UIFont.SystemFontOfSize (18f);
-			distanceLbl.Text = Stops [Indexes [(int)section]].Distance.ToString ("0.##") + " mi.";
+			distanceLbl.Text = Stops [Indexes [(int)section]].Distance.ToString ("0.00") + " mi";
 
 
 
