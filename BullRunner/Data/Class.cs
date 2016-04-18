@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Generic;
 
 namespace BullRunner
 {
@@ -32,7 +33,7 @@ namespace BullRunner
 	public class Arrival
 	{
 		public string PredictionTime { get; set; }
-		public Prediction[] Predictions { get; set; }
+		public List<Prediction> Predictions { get; set; }
 	}
 }
 
