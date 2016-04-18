@@ -33,11 +33,24 @@ namespace BullRunner
 			_Manager.DistanceFilter = 100f;
 
 			_Manager.LocationsUpdated += LocationsUpdated;
+			this.RefreshControl.ValueChanged += (sender, e) => this.RefreshData (this._Manager.Location);
 		}
 
 		void LocationsUpdated (object sender, CLLocationsUpdatedEventArgs e)
 		{
-			var l = e.Locations [e.Locations.Length - 1];
+			var l = _Manager.Location;
+			RefreshData (l);
+		}
+
+		void RefreshData(CLLocation l)
+		{
+			if (l == null) {
+				this.RefreshControl.EndRefreshing ();
+				return;
+			}
+				
+			UIApplication.SharedApplication.NetworkActivityIndicatorVisible = true;
+			this.RefreshControl.BeginRefreshing ();
 
 			InvokeInBackground (async delegate {
 				try {
@@ -59,6 +72,11 @@ namespace BullRunner
 							Console.WriteLine(ex);
 						}
 					}
+
+					InvokeOnMainThread(delegate {
+						this.RefreshControl.EndRefreshing();
+						UIApplication.SharedApplication.NetworkActivityIndicatorVisible = false;
+					});
 				} catch (Exception ex) {
 					Console.WriteLine(ex);
 				}
