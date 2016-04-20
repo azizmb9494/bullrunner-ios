@@ -69,12 +69,12 @@ namespace BullRunner
 			UILabel stopLbl = new UILabel (new CGRect (15, 0, tableView.Frame.Width-115, 42));
 			stopLbl.BackgroundColor = UIColor.Clear;
 			stopLbl.Text = Stops [Indexes [(int)section]].StopName;
-			stopLbl.Font = UIFont.BoldSystemFontOfSize (18f);
+			stopLbl.Font = UIFont.BoldSystemFontOfSize (19f);
 
 			UILabel distanceLbl = new UILabel (new CGRect (tableView.Frame.Width-110, 0, 100, 42));
 			distanceLbl.BackgroundColor = UIColor.Clear;
 			distanceLbl.TextAlignment = UITextAlignment.Right;
-			distanceLbl.Font = UIFont.SystemFontOfSize (18f);
+			distanceLbl.Font = UIFont.SystemFontOfSize (19f);
 			distanceLbl.Text = Stops [Indexes [(int)section]].Distance.ToString ("0.00") + " mi";
 
 
@@ -100,6 +100,11 @@ namespace BullRunner
 			}
 				
 			return cell;
+		}
+
+		public override void RowSelected (UITableView tableView, Foundation.NSIndexPath indexPath)
+		{
+			tableView.DeselectRow (indexPath, true);
 		}
 	}
 }

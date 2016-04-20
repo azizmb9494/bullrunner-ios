@@ -69,21 +69,23 @@ namespace BullRunner
 							var predictions = await Provider.GetPredictionsAsync(s.RouteId, s.StopId);
 							if (predictions.Count > 0) { 
 								Predictions.Add(s, predictions);
+								InvokeOnMainThread(delegate {
+									this.TableView.Source = new StopsSource(this.Predictions);
+									this.TableView.ReloadData();
+								});
 							}
 						} catch (Exception ex) {
 							Console.WriteLine(ex);
 						}
 					}
-
-					InvokeOnMainThread(delegate {
-						this.RefreshControl.EndRefreshing();
-						UIApplication.SharedApplication.NetworkActivityIndicatorVisible = false;
-						this.TableView.Source = new StopsSource(this.Predictions);
-						this.TableView.ReloadData();
-					});
 				} catch (Exception ex) {
 					Console.WriteLine(ex);
 				}
+
+				InvokeOnMainThread(delegate {
+					this.RefreshControl.EndRefreshing();
+					UIApplication.SharedApplication.NetworkActivityIndicatorVisible = false;
+				});
 			});
 		}
 

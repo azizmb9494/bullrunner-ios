@@ -20,7 +20,7 @@ namespace BullRunner
 
 		public StopCell (string routeName, List<Prediction> preds) : base (UITableViewCellStyle.Default, "stopCell")
 		{
-			NameLbl = new UILabel ();
+			NameLbl = new UILabel () { Font = UIFont.SystemFontOfSize (17f) };
 
 			PredsLbl = new UILabel[2];
 			for (int i = 0; i < PredsLbl.Length; i++) {
@@ -54,9 +54,10 @@ namespace BullRunner
 		public override void LayoutSubviews ()
 		{
 			base.LayoutSubviews ();
-			NameLbl.Frame = new CGRect (10, 5, 150, 56);
+			NameLbl.Frame = new CGRect (15, 5, 145, 56);
+			nfloat startingX = this.ContentView.Frame.Width - (PredsLbl.Length * 80) - 10;
 			for (int i = 0; i < PredsLbl.Length; i++) {
-				PredsLbl [i].Frame = new CGRect (200 + (i * 80), 13, 75, 40); 
+				PredsLbl [i].Frame = new CGRect (startingX + (i * 80), 13, 75, 40); 
 			}
 		}
 	}
